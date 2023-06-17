@@ -9,15 +9,7 @@ from pydantic import BaseModel
 
 from fastapi.middleware.cors import CORSMiddleware
 
-origins = ["*"]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 model = pickle.load(open("classifier.dat", "rb"))
 
@@ -48,3 +40,12 @@ async def predict_post(datas: List[InputFeatures]):
 if __name__ == "__main__":
     print(get_features_dict(model))
     uvicorn.run(app, host="0.0.0.0", port=8080)
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
